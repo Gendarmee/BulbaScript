@@ -1,55 +1,37 @@
 ﻿#include "Object.hpp"
 
-Object::Object() : str(L""), num(0.0), boolean(false), nil(nullptr), type(Object_nil) {}
+Object::Object() : type(ObjType::Nil), value(nullptr) {}
 
-Object::Object(ObjType type) : str(L""), num(0.0), boolean(false), nil(nullptr), type(type) {}
+Object::Object(ObjType type, ValueType value) : type(type), value(std::move(value)) {}
 
-std::wstring Object::toString() {
+std::wstring Object::toString() const {
     switch (type) {
-    case Object_nil:
-        return L"nil";
-    case Object_bool:
-        return boolean ? L"true" : L"false";
-    case Object_str:
-        return str;
-    case Object_fun:
-        return L"func: ";
-    //case Object_class:
-    //    return lox_class->toString();
-    //case Object_instance:
-    //    return instance->toString();
-    case Object_num:
-        return std::to_wstring(num);
-    default:
-        return L"<unknown>";
+    case ObjType::String: return std::get<std::wstring>(value);
+    case ObjType::Number: return std::to_wstring(std::get<double>(value));
+    case ObjType::Boolean: return std::get<bool>(value) ? L"true" : L"false";
+    case ObjType::Nil: return L"nil";
+    default: return L"<unsupported>";
     }
 }
 
 Object Object::make_num_obj(double num) {
-    Object num_obj(Object_num);
-    num_obj.num = num;
-    return num_obj;
+    return Object(ObjType::Number, num);
 }
 
-Object Object::make_str_obj(std::wstring str) {
-    Object str_obj(Object_str);
-    str_obj.str = str;
-    return str_obj;
+Object Object::make_str_obj(const std::wstring& str) {
+    return Object(ObjType::String, str);
 }
 
 Object Object::make_bool_obj(bool boolean) {
-    Object bool_obj(Object_bool);
-    bool_obj.boolean = boolean;
-    return bool_obj;
+    return Object(ObjType::Boolean, boolean);
 }
 
 Object Object::make_nil_obj() {
-    return Object(Object_nil);
+    return Object(ObjType::Nil, nullptr);
 }
 
-//// Реализация оператора вывода для std::ostream
-//std::ostream& operator<<(std::ostream& out, const Object& object) {
-//    std::wstring result = object.toString();
-//    out << std::string(result.begin(), result.end());  // Конвертируем из wstring в string для вывода в std::ostream
-//    return out;
-//}
+std::ostream& operator<<(std::ostream& out, const Object& object) {
+    std::wstring ws = object.toString();
+    std::string s(ws.begin(), ws.end());
+    return out << s;
+}

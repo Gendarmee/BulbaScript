@@ -1,4 +1,6 @@
 ﻿#include "Token.hpp"
+#include "Object.hpp"
+
 
 wstring Token::toString()
 {

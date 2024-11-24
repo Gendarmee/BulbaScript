@@ -154,7 +154,6 @@ void Scanner::number() {
     addToken(TokenType::NUMBER, Object::make_num_obj(value));
 }
 
-
 wchar_t Scanner::peekNext() {
     if (current + 1 >= source.length()) return L'\0';
     return source.at(current + 1);

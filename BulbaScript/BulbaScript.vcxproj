@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,7 +128,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AstPrinter.cpp" />
     <ClCompile Include="BS.cpp" />
+    <ClCompile Include="Environment.cpp" />
+    <ClCompile Include="Environment.hpp" />
+    <ClCompile Include="Interpreter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -137,11 +141,15 @@
     <ClCompile Include="TokenType.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AstPrinter.hpp" />
     <ClInclude Include="BS.hpp" />
     <ClInclude Include="Expr.hpp" />
+    <ClInclude Include="Interpreter.hpp" />
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="Parser.hpp" />
+    <ClInclude Include="RuntimeError.hpp" />
     <ClInclude Include="Scanner.hpp" />
+    <ClInclude Include="Stmt.hpp" />
     <ClInclude Include="Token.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

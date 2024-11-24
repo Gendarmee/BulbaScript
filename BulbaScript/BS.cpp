@@ -5,6 +5,8 @@
 
 #include "BS.hpp"
 #include "Scanner.hpp"
+#include "Parser.hpp"
+#include "AstPrinter.hpp"
 
 using std::wstring;
 using std::wstringstream;
@@ -15,6 +17,7 @@ using std::endl;
 using std::vector;
 
 bool BS::hadError = false;
+Interpritator BS::interpreter;
 bool BS::hadRuntimeError = false;
 
 int BS::runScript(int argc, wchar_t* argv[]) {
@@ -29,6 +32,12 @@ int BS::runScript(int argc, wchar_t* argv[]) {
         runPrompt();
     }
     return 0;
+}
+
+void BS::runtimeError(RuntimeError error) {
+    std::wcout << error.getMessage() <<
+        L"\n[line " << error.token.line << L"]";
+        hadRuntimeError = true;
 }
 
 void BS::runFile(wstring path) {
@@ -65,9 +74,19 @@ void BS::report(int line, wstring where, wstring message) {
 }
 
 void BS::run(wstring source) {
-    Scanner scanner(source); 
-    vector<Token> tokens = scanner.scanTokens(); 
-    for (auto token : tokens) {
-        wcout << token.toString() << endl;
+    Scanner scanner(source);
+    std::vector<Token> tokens = scanner.scanTokens();
+
+    Parser parser(tokens);
+    std::vector<std::shared_ptr<Stmt>> statements = parser.parse();
+
+    if (hadError) {
+        std::wcerr << L"Parsing error occurred. Expression is invalid." << std::endl;
+        return;
     }
+    interpreter.interpret(statements);
+
+    //AstPrinter printer;
+    //std::wstring output = printer.print(statements);
+    //std::wcout << output << std::endl;
 }
