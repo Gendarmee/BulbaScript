@@ -3,6 +3,9 @@
 void Interpritator::interpret(std::vector<std::shared_ptr<Stmt>> statements) {
     try {
         for (const auto& statement : statements) {
+            if (!statement) {
+                throw std::runtime_error("Nullptr found in statements vector.");
+            }
             execute(statement);
         }
     }
@@ -12,6 +15,9 @@ void Interpritator::interpret(std::vector<std::shared_ptr<Stmt>> statements) {
 }
 
 void Interpritator::execute(const std::shared_ptr<Stmt>& stmt) {
+    if (!stmt) {
+        throw std::runtime_error("Attempted to execute a nullptr statement.");
+    }
     stmt->accept(*this);
 }
 
