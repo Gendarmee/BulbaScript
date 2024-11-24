@@ -139,11 +139,12 @@ Object Interpritator::visit(const Binary& binaryExpr) {
     return Object::make_nil_obj();
 }
 
-void Interpritator::executeBlock(const std::vector<std::shared_ptr<Stmt>>& statements, std::shared_ptr<Environment> newEnvironment)
-{
+void Interpritator::executeBlock(
+    const std::vector<std::shared_ptr<Stmt>>& statements,
+    std::shared_ptr<Environment> newEnv) {
     auto previous = environment;
     try {
-        environment = newEnvironment;
+        environment = newEnv;
         for (const auto& statement : statements) {
             execute(statement);
         }
@@ -154,6 +155,7 @@ void Interpritator::executeBlock(const std::vector<std::shared_ptr<Stmt>>& state
     }
     environment = previous;
 }
+
 
 Object Interpritator::visit(const Assign& expr) {
     Object value = evaluate(expr.value);

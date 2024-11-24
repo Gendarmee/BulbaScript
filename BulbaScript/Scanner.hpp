@@ -16,6 +16,7 @@ private:
     int line = 1;                      
 
     std::unordered_map<wstring, TokenType> keywords = {
+        {L"var",    TokenType::VAR},
         {L"and",    TokenType::AND},
         {L"class",  TokenType::CLASS},
         {L"else",   TokenType::ELSE},

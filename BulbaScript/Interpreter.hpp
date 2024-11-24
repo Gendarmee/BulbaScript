@@ -13,9 +13,9 @@
 class Interpritator : public NSStmt::Visitor, public NSExpr::Visitor {
 public:
     void interpret(std::vector<std::shared_ptr<Stmt>> statements);
-
+    Interpritator() : environment(std::make_shared<Environment>()) {};
 private:
-    std::shared_ptr<Environment> environment = std::make_shared<Environment>();
+    std::shared_ptr<Environment> environment;
 
     void execute(const std::shared_ptr<Stmt>& stmt);
 

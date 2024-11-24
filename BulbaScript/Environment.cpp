@@ -9,17 +9,17 @@ void Environment::define(const std::wstring& name, const Object& value) {
     values[name] = value;
 }
 
+
 Object Environment::get(const Token& name) const {
     if (values.contains(name.lexeme)) {
         return values.at(name.lexeme);
     }
-
     if (enclosing) {
         return enclosing->get(name);
     }
-
     throw RuntimeError(name, L"Undefined variable '" + name.lexeme + L"'.");
 }
+
 
 void Environment::assign(const Token& name, const Object& value) {
     if (values.contains(name.lexeme)) {

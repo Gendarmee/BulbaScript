@@ -45,7 +45,7 @@ void BS::runFile(wstring path) {
     if (!input) {
         wprintf(L"Could not open file: %s\n", path.c_str());
         exit(1);
-    }
+    }   
     wstringstream sstr;
     sstr << input.rdbuf();
     run(sstr.str());
