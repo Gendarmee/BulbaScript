@@ -6,14 +6,17 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <unordered_set>
 #include "Expr.hpp"
 
 class Parser {
 public:
     explicit Parser(const std::vector<Token>& tokens) : tokens(tokens), current(0) {}
+
     std::vector<std::shared_ptr<Stmt>> parse();
     std::shared_ptr<Stmt> declaration();
     std::shared_ptr<Stmt> varDeclaration();
+
 private:
     const std::vector<Token>& tokens;
     size_t current;
@@ -42,6 +45,8 @@ private:
     std::runtime_error error(const Token& token, const std::wstring& message);
 
     void synchronize();
+
+    void debugTokens() const;
 };
 
 #endif // PARSER_HPP
