@@ -26,6 +26,11 @@ Object Object::make_bool_obj(bool boolean) {
     return Object(ObjType::Boolean, boolean);
 }
 
+Object Object::make_fun_obj(shared_ptr<BSCallable> function)
+{
+    return Object(ObjType::Function, function);
+}
+
 Object Object::make_nil_obj() {
     return Object(ObjType::Nil, nullptr);
 }

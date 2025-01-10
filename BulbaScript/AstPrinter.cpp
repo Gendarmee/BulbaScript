@@ -15,6 +15,11 @@ Object AstPrinter::visit(const Assign& expr) {
     return parenthesize(expr.name.lexeme, { expr.value });
 }
 
+Object AstPrinter::visit(const Call& expr)
+{
+    return parenthesize(expr.paren.lexeme, { expr.arguments });
+}
+
 Object AstPrinter::visit(const Variable& expr) {
     return parenthesize(expr.name.lexeme, {});
 }

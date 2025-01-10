@@ -6,6 +6,11 @@
 #include <iostream>
 #include <memory>
 #include <optional>
+#include "BSCallable.hpp"
+
+class BSCallable;
+
+using std::shared_ptr, std::wstring, std::nullptr_t, std::variant;
 
 enum class ObjType {
     String,    // string
@@ -19,17 +24,19 @@ enum class ObjType {
 
 class Object {
 public:
-    using ValueType = std::variant<std::wstring, double, bool, std::nullptr_t>;
+    using ValueType = variant<wstring, double, bool,nullptr_t, shared_ptr<BSCallable>>;
 
     Object();
     explicit Object(ObjType type, ValueType value);
 
-    std::wstring toString() const;
+    wstring toString() const;
 
-    // Фабричные методы
     static Object make_num_obj(double num);
-    static Object make_str_obj(const std::wstring& str);
+    static Object make_str_obj(const wstring& str);
     static Object make_bool_obj(bool boolean);
+    static Object make_fun_obj(shared_ptr<BSCallable> function);
+    //static Object make_instance_obj(shared_ptr<LoxInstance> instance_);
+    //static Object make_class_obj(shared_ptr<LoxClass> lox_class_);
     static Object make_nil_obj();
     
     ObjType getType() const {

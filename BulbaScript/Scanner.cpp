@@ -13,12 +13,11 @@ bool Scanner::isAtEnd()
 vector<Token> Scanner::scanTokens()
 {
     while (!isAtEnd()) {
-        // Мы находимся в начале следующей лексемы
         start = current;
         scanToken();
     }
 
-    Token token(TokenType::EF, L"", Object::make_str_obj(L""), line);
+    Token token(EF, L"", Object::make_str_obj(L""), line);
     tokens.push_back(token);
 
     return tokens;
@@ -29,27 +28,27 @@ void Scanner::scanToken()
 {
     wchar_t c = advance();
     switch (c) {
-    case L'(': addToken(TokenType::LEFT_PAREN); break;
-    case L')': addToken(TokenType::RIGHT_PAREN); break;
-    case L'{': addToken(TokenType::LEFT_BRACE); break;
-    case L'}': addToken(TokenType::RIGHT_BRACE); break;
-    case L',': addToken(TokenType::COMMA); break;
-    case L'.': addToken(TokenType::DOT); break;
-    case L'-': addToken(TokenType::MINUS); break;
-    case L'+': addToken(TokenType::PLUS); break;
-    case L';': addToken(TokenType::SEMICOLON); break;
-    case L'*': addToken(TokenType::STAR); break;
+    case L'(': addToken(LEFT_PAREN); break;
+    case L')': addToken(RIGHT_PAREN); break;
+    case L'{': addToken(LEFT_BRACE); break;
+    case L'}': addToken(RIGHT_BRACE); break;
+    case L',': addToken(COMMA); break;
+    case L'.': addToken(DOT); break;
+    case L'-': addToken(MINUS); break;
+    case L'+': addToken(PLUS); break;
+    case L';': addToken(SEMICOLON); break;
+    case L'*': addToken(STAR); break;
     case L'!':
-        addToken(match(L'=') ? TokenType::BANG_EQUAL : TokenType::BANG);
+        addToken(match(L'=') ? BANG_EQUAL : BANG);
         break;
     case L'=':
-        addToken(match(L'=') ? TokenType::EQUAL_EQUAL : TokenType::EQUAL);
+        addToken(match(L'=') ? EQUAL_EQUAL : EQUAL);
         break;
     case L'<':
-        addToken(match(L'=') ? TokenType::LESS_EQUAL : TokenType::LESS);
+        addToken(match(L'=') ? LESS_EQUAL : LESS);
         break;
     case L'>':
-        addToken(match(L'=') ? TokenType::GREATER_EQUAL : TokenType::GREATER);
+        addToken(match(L'=') ? GREATER_EQUAL : GREATER);
         break;
     case L'/':
         if (match(L'/')) {
@@ -71,7 +70,7 @@ void Scanner::scanToken()
             }
         }
         else {
-            addToken(TokenType::SLASH);
+            addToken(SLASH);
         }
         break;
     case L' ':
@@ -107,7 +106,7 @@ void Scanner::identifier() {
     TokenType token;
     auto iter = keywords.find(id);
     if (iter == keywords.end()) {
-        token = TokenType::IDENTIFIER;
+        token = IDENTIFIER;
     }
     else {
         token = iter->second;
@@ -151,7 +150,7 @@ void Scanner::number() {
         }
     }
     double value = (double)_wtof(source.substr(start, current - start).c_str());
-    addToken(TokenType::NUMBER, Object::make_num_obj(value));
+    addToken(NUMBER, Object::make_num_obj(value));
 }
 
 wchar_t Scanner::peekNext() {
@@ -176,7 +175,7 @@ void Scanner::str() {
 
     // Убираем окружающие кавычки, корректируем длину
     wstring value = source.substr(start + 1, current - start - 2);
-    addToken(TokenType::STRING, Object::make_str_obj(value)); 
+    addToken(STRING, Object::make_str_obj(value)); 
 }
 
 

@@ -1,0 +1,5 @@
+fun toString(n) {
+  return "string" + n;
+}
+
+print toString(123);

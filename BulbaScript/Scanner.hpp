@@ -16,18 +16,19 @@ private:
     int line = 1;                      
 
     std::unordered_map<wstring, TokenType> keywords = {
-        {L"var",    TokenType::VAR},
-        {L"and",    TokenType::AND},
-        {L"class",  TokenType::CLASS},
-        {L"else",   TokenType::ELSE},
-        {L"false",  TokenType::FALSE},
-        {L"for",    TokenType::FOR},
-        {L"fun",    TokenType::FUN},
-        {L"if",     TokenType::IF},
-        {L"nil",    TokenType::NIL},
-        {L"or",     TokenType::OR},
-        {L"print",  TokenType::PRINT},
-        {L"return", TokenType::RETURN},
+        {L"var",    VAR},
+        {L"while",    WHILE},
+        {L"and",    AND},
+        {L"class",  CLASS},
+        {L"else",   ELSE},
+        {L"false",  FALSE},
+        {L"for",    FOR},
+        {L"fun",    FUN},
+        {L"if",     IF},
+        {L"nil",    NIL},
+        {L"or",     OR},
+        {L"print",  PRINT},
+        {L"return", RETURN},
     };
 
     bool isAtEnd();                 

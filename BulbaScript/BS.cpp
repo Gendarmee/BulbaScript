@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -20,13 +20,13 @@ bool BS::hadError = false;
 Interpritator BS::interpreter;
 bool BS::hadRuntimeError = false;
 
-int BS::runScript(int argc, wchar_t* argv[]) {
+int BS::runScript(int argc, char* argv[]) {
     if (argc > 2) {
         wprintf(L"Usage: BulbaScript \n");
         return 1;
     }
     else if (argc == 2) {
-        runFile(argv[1]);
+        runFile(stringToWString(argv[1]));
     }
     else {
         runPrompt();
@@ -34,20 +34,33 @@ int BS::runScript(int argc, wchar_t* argv[]) {
     return 0;
 }
 
+std::wstring BS::stringToWString(const std::string& str) {
+    return std::wstring(str.begin(), str.end());
+}
+
+std::string BS::wstringToString(const std::wstring& str) {
+    return std::string(str.begin(), str.end());
+}
+
+
 void BS::runtimeError(RuntimeError error) {
     std::wcout << error.getMessage() <<
         L"\n[line " << error.token.line << L"]";
         hadRuntimeError = true;
 }
 
-void BS::runFile(wstring path) {
-    ifstream input(path);
+void BS::runFile( std::wstring path) {
+    std::wifstream input(path);
     if (!input) {
-        wprintf(L"Could not open file: %s\n", path.c_str());
+        std::wcerr << L"Could not open file: " << path << std::endl;
         exit(1);
-    }   
-    wstringstream sstr;
+    }
+
+    std::wstringstream sstr;
     sstr << input.rdbuf();
+
+    //std::wcout << L"File content: " << sstr.str() << std::endl;
+
     run(sstr.str());
 
     if (hadError) exit(65);
@@ -84,9 +97,10 @@ void BS::run(wstring source) {
         std::wcerr << L"Parsing error occurred. Expression is invalid." << std::endl;
         return;
     }
+
     interpreter.interpret(statements);
 
-    //AstPrinter printer;
-    //std::wstring output = printer.print(statements);
-    //std::wcout << output << std::endl;
+//AstPrinter printer;
+//std::wstring output = printer.print(statements);
+//std::wcout << output << std::endl;
 }

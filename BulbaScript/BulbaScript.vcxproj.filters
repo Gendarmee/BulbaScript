@@ -48,6 +48,18 @@
     <ClCompile Include="Environment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BSCallable.hpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BSFunction.hpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BSFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnError.hpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BS.hpp">
@@ -71,7 +83,7 @@
     <ClInclude Include="AstPrinter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Interpreter.hpp">
+    <ClInclude Include="Interpritator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RuntimeError.hpp">

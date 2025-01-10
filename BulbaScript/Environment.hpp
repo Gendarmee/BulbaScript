@@ -9,8 +9,7 @@
 
 class Environment {
 public:
-    Environment() : enclosing(nullptr) {};
-    explicit Environment(std::shared_ptr<Environment> enclosing);
+    explicit Environment(std::shared_ptr<Environment> enclosing = nullptr);
 
     void define(const std::wstring& name, const Object& value);
     Object get(const Token& name) const;

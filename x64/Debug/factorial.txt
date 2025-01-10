@@ -1,0 +1,9 @@
+fun factorial(n) {
+  if (n <= 1) {
+    return 1; // Базовый случай
+  } else {
+    return n * factorial(n - 1); // Рекурсивный случай
+  }
+}
+
+print factorial(5); // Вывод: 120

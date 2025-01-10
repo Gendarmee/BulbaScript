@@ -9,7 +9,6 @@ void Environment::define(const std::wstring& name, const Object& value) {
     values[name] = value;
 }
 
-
 Object Environment::get(const Token& name) const {
     if (values.contains(name.lexeme)) {
         return values.at(name.lexeme);

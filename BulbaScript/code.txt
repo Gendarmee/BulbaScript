@@ -1,0 +1,13 @@
+var count = 0; 
+{
+    fun A(n) {
+        count = count + 1;
+        if (n < 1) {
+            return n;
+        }
+        return A(1.5 * n - n);
+    }
+
+    print(A(1000));
+    print(count);
+}

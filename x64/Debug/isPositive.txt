@@ -1,0 +1,7 @@
+fun isPositive(n) {
+  return n > 0;
+}
+
+print isPositive(5); 
+print isPositive(-3);
+print isPositive(0); 

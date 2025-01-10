@@ -1,0 +1,7 @@
+fun min(a, b) {
+  if (a < b) return a;
+  return b;
+}
+
+print min(10, 20); 
+print min(5, 3);  

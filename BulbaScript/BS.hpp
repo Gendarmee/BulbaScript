@@ -3,18 +3,18 @@
 #include <string>
 #include <iostream>
 #include "RuntimeError.hpp"
-#include "Interpreter.hpp"
-
-class Interpritator;
+#include "Interpritator.hpp"
 
 using std::wstring;
 
 class BS {
 public:
     static void error(int line, wstring message);
-    static int runScript(int argc, wchar_t* argv[]);
+    static int runScript(int argc, char* argv[]);
     static void runtimeError(RuntimeError error);
 private:
+    static std::wstring stringToWString(const std::string& str);
+    static std::string wstringToString(const std::wstring& str);
     static Interpritator interpreter;
     static bool hadError;
     static bool hadRuntimeError;

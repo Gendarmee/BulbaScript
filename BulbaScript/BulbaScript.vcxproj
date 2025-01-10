@@ -130,9 +130,13 @@
   <ItemGroup>
     <ClCompile Include="AstPrinter.cpp" />
     <ClCompile Include="BS.cpp" />
+    <ClCompile Include="BSFunction.cpp" />
+    <ClCompile Include="ReturnError.hpp" />
     <ClCompile Include="Environment.cpp" />
     <ClCompile Include="Environment.hpp" />
+    <ClCompile Include="BSFunction.hpp" />
     <ClCompile Include="Interpreter.cpp" />
+    <ClCompile Include="BSCallable.hpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -144,7 +148,7 @@
     <ClInclude Include="AstPrinter.hpp" />
     <ClInclude Include="BS.hpp" />
     <ClInclude Include="Expr.hpp" />
-    <ClInclude Include="Interpreter.hpp" />
+    <ClInclude Include="Interpritator.hpp" />
     <ClInclude Include="Object.hpp" />
     <ClInclude Include="Parser.hpp" />
     <ClInclude Include="RuntimeError.hpp" />

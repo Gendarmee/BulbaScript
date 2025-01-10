@@ -1,0 +1,6 @@
+fun square(n) {
+  return n * n;
+}
+
+print square(4); 
+print square(7);

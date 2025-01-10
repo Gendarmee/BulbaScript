@@ -12,9 +12,10 @@ class AstPrinter : public NSExpr::Visitor {
 public:
     std::wstring print(const std::shared_ptr<Expr>& expr);
 
+    Object visit(const Call& expr) override;
+    Object visit(const Variable& expr) override;
     Object visit(const Binary& expr) override;
     Object visit(const Assign& expr) override;
-    Object visit(const Variable& expr) override;
     Object visit(const Grouping& expr) override;
     Object visit(const Literal& expr) override;
     Object visit(const Unary& expr) override;
